@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cyanweb-redis
+  name: cyanweb-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyanweb-redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cyanweb-redis
+    spec:
+      containers:
+      - image: redis:latest
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: cyanweb-config
+        name: cyanweb-redis
+        ports:
+          - containerPort: 6379
+            protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

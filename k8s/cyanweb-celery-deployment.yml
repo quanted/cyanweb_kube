@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cyanweb-celery
+  name: cyanweb-celery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyanweb-celery
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cyanweb-celery
+    spec:
+      containers:
+      - args:
+        - celery
+        - -A
+        - celery_worker.celery
+        - worker
+        - --loglevel=INFO
+        - -c
+        - 1
+        image: #TODO: Replace with cyanweb-flask image
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: cyanweb-config
+        name: cyanweb-flask
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

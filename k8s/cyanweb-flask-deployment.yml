@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cyanweb-flask
+  name: cyanweb-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyanweb-flask
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cyanweb-flask
+    spec:
+      containers:
+      - image: #TODO: Replace with cyanweb-flask image
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: cyanweb-config
+        name: cyanweb-flask
+        ports:
+        - containerPort: 5001
+          protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

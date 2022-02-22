@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: cyanweb-mysql
+  name: cyanweb-mysql
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyanweb-mysql
+  serviceName: cyanweb-mysql
+  template:
+    metadata:
+      labels:
+        app: cyanweb-mysql
+    spec:
+      containers:
+      - image: #TODO: replace with cyanweb mysql image
+        imagePullPolicy: Always
+        name: cyanweb-mysql
+        env:
+          - name: MYSQL_RANDOM_ROOT_PASSWORD
+            value: "yes"
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: cyanweb-appdata
+          - mountPath: /tmp
+            name: cyanweb-apptemp
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      volumes:
+        - name: cyanweb-appdata
+          hostPath:
+            path: /D//data/cyan/app-data
+        - name: cyanweb-apptemp
+          hostPath:
+            path: /D//data/cyan/temp-data
+#        - name: cyanweb-appdata
+#          persistentVolumeClaim:
+#            claimName: #TODO: Create pvc for cyanweb-appdata
+#        - name: cyanweb-apptemp
+#          persistentVolumeClaim:
+#            claimName: #TODO: Create pvc for cyanweb-tempdata
+

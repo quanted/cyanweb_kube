@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cyanweb-nginx
+  name: cyanweb-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyanweb-nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cyanweb-nginx
+    spec:
+      containers:
+      - image: #TODO: Add cyanweb nginx image path
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: cyanweb-config
+        name: nginx
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+      restartPolicy: Always
