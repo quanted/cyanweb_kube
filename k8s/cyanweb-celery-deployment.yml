@@ -25,7 +25,7 @@ spec:
         - --loglevel=INFO
         - -c
         - 1
-        image: #TODO: Replace with cyanweb-flask image
+        image: ghcr.io/usepa/cyanweb-api:dev-kube
         imagePullPolicy: Always
         envFrom:
           - configMapRef:

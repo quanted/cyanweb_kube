@@ -17,7 +17,7 @@ spec:
         app: cyanweb-mysql
     spec:
       containers:
-      - image: #TODO: replace with cyanweb mysql image
+      - image: ghcr.io/usepa/cyanweb-db:dev-kube
         imagePullPolicy: Always
         name: cyanweb-mysql
         env:

@@ -17,7 +17,7 @@ spec:
         app: cyanweb-flask
     spec:
       containers:
-      - image: #TODO: Replace with cyanweb-flask image
+      - image: ghcr.io/usepa/cyanweb-api:dev-kube
         imagePullPolicy: Always
         envFrom:
           - configMapRef:

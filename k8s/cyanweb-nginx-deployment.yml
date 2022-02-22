@@ -17,7 +17,7 @@ spec:
         app: cyanweb-nginx
     spec:
       containers:
-      - image: #TODO: Add cyanweb nginx image path
+      - image: ghcr.io/usepa/cyanweb-nginx:dev-kube
         imagePullPolicy: Always
         envFrom:
           - configMapRef:
