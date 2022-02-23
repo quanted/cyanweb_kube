@@ -18,18 +18,19 @@ spec:
     spec:
       containers:
       - args:
-        - celery
-        - -A
-        - celery_worker.celery
-        - worker
-        - --loglevel=INFO
-        - -c
-        - 1
-        image: ghcr.io/usepa/cyanweb-api:dev-kube
-        imagePullPolicy: Always
+          - celery
+          - -A
+          - celery_worker.celery
+          - worker
+          - --loglevel=INFO
+          - -c
+          - '1'
         envFrom:
-          - configMapRef:
-              name: cyanweb-config
+        - configMapRef:
+            name: cyanweb-config
+#        image: ghcr.io/usepa/cyanweb-api:dev-kube
+        image: cyan-flask-test
+        imagePullPolicy: Always
         name: cyanweb-flask
       dnsPolicy: ClusterFirst
       restartPolicy: Always

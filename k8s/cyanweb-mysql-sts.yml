@@ -37,10 +37,10 @@ spec:
       volumes:
         - name: cyanweb-appdata
           hostPath:
-            path: /D//data/cyan/app-data
+            path: /D//data/cyankube/app-data
         - name: cyanweb-apptemp
           hostPath:
-            path: /D//data/cyan/temp-data
+            path: /D//data/cyankube/temp-data
 #        - name: cyanweb-appdata
 #          persistentVolumeClaim:
 #            claimName: #TODO: Create pvc for cyanweb-appdata
