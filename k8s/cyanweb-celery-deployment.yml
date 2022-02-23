@@ -28,8 +28,7 @@ spec:
         envFrom:
         - configMapRef:
             name: cyanweb-config
-#        image: ghcr.io/usepa/cyanweb-api:dev-kube
-        image: cyan-flask-test
+        image: ghcr.io/usepa/cyanweb-api:dev-kube
         imagePullPolicy: Always
         name: cyanweb-flask
       dnsPolicy: ClusterFirst

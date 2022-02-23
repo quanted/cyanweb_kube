@@ -9,6 +9,7 @@ data:
   DB_NAME: "cyan_web_app_db"
   DB_PORT: "3306"
   DB_USER: "cyano"
+  DB_PASS: ""
   EMAIL: "cyanomailserver@gmail.com"
   EMAIL_PORT: "465"
   EMAIL_SMTP: "smtp.gmail.com"
