@@ -18,10 +18,9 @@ spec:
     spec:
       containers:
       - image: ghcr.io/usepa/cyanweb-nginx:dev-kube
+      # - image: cyanweb-nginx-testing
         imagePullPolicy: Always
-        envFrom:
-          - configMapRef:
-              name: cyanweb-config
+        # imagePullPolicy: Never
         name: nginx
         ports:
         - containerPort: 80

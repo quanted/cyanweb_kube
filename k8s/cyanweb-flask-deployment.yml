@@ -18,7 +18,9 @@ spec:
     spec:
       containers:
       - image: ghcr.io/usepa/cyanweb-api:dev-kube
+      # - image: cyanweb-api-testing
         imagePullPolicy: Always
+        # imagePullPolicy: Never
         envFrom:
           - configMapRef:
               name: cyanweb-config
@@ -26,5 +28,12 @@ spec:
         ports:
         - containerPort: 5001
           protocol: TCP
+        volumeMounts:
+          - mountPath: /config
+            name: config-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+      volumes:
+        - name: config-volume
+          hostPath:
+            path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config

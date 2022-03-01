@@ -19,9 +19,6 @@ spec:
       containers:
       - image: redis:latest
         imagePullPolicy: Always
-        envFrom:
-          - configMapRef:
-              name: cyanweb-config
         name: cyanweb-redis
         ports:
           - containerPort: 6379

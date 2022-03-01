@@ -8,5 +8,5 @@ spec:
     protocol: TCP
     targetPort: 6379
   selector:
-    app: cyanweb-flask
+    app: cyanweb-redis
   type: ClusterIP

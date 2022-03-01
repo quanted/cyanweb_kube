@@ -29,7 +29,16 @@ spec:
         - configMapRef:
             name: cyanweb-config
         image: ghcr.io/usepa/cyanweb-api:dev-kube
+        # image: cyanweb-api-testing
         imagePullPolicy: Always
+        # imagePullPolicy: Never
         name: cyanweb-flask
+        volumeMounts:
+          - mountPath: /config
+            name: config-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+      volumes:
+        - name: config-volume
+          hostPath:
+            path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config
