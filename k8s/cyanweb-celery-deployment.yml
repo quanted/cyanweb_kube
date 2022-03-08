@@ -4,6 +4,11 @@ metadata:
   labels:
     app: cyanweb-celery
   name: cyanweb-celery
+  namespace: cyanweb-kube
+  annotations:
+    app.gitlab.com/app: ${CI_PROJECT_PATH_SLUG}
+    app.gitlab.com/env: ${CI_ENVIRONMENT_SLUG}
+    eks.amazonaws.com/compute-type: fargate
 spec:
   replicas: 1
   selector:
@@ -28,17 +33,44 @@ spec:
         envFrom:
         - configMapRef:
             name: cyanweb-config
-        image: ghcr.io/usepa/cyanweb-api:dev-kube
+        image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
         # image: cyanweb-api-testing
         imagePullPolicy: Always
         # imagePullPolicy: Never
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 10
         name: cyanweb-flask
         volumeMounts:
           - mountPath: /config
-            name: config-volume
+            name: cyanweb-config-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       volumes:
-        - name: config-volume
-          hostPath:
-            path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config
+      - name: cyanweb-config-volume
+        persistentVolumeClaim:
+          claimName: cyanweb-config-pvolume-claim1
+      # volumes:
+      #   - name: cyanweb-config-volume
+      #     hostPath:
+      #       path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config

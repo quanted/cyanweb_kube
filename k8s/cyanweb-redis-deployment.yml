@@ -4,6 +4,11 @@ metadata:
   labels:
     app: cyanweb-redis
   name: cyanweb-redis
+  namespace: cyanweb-kube
+  annotations:
+    app.gitlab.com/app: ${CI_PROJECT_PATH_SLUG}
+    app.gitlab.com/env: ${CI_ENVIRONMENT_SLUG}
+    eks.amazonaws.com/compute-type: fargate
 spec:
   replicas: 1
   selector:
@@ -20,6 +25,22 @@ spec:
       - image: redis:latest
         imagePullPolicy: Always
         name: cyanweb-redis
+        livenessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 10
         ports:
           - containerPort: 6379
             protocol: TCP
