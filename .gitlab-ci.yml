@@ -1,0 +1,132 @@
+stages:
+  - Image Build
+  - Deployment
+  - Restart Pods
+  - Image Scan
+
+include:
+  - project: 'DSO/DASTScanner'
+    file: '.gitlab-ci.yml'
+  - remote: 'https://gitlab.com/prismacloud-public/shift-left/extension/-/raw/master/.pcs.gitlab-ci.yml'
+
+
+CopyDevImages:
+  stage: Image Build
+  tags:
+    - devsecops-instance
+  when: manual
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - mkdir -p /workspace
+    # Cyanweb Flask Image:
+    - echo "FROM ghcr.io/USEPA/cyanweb-api:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-api:$CI_COMMIT_REF_NAME
+    # Cyanweb Angular Image:
+    - echo "FROM ghcr.io/USEPA/cyanweb-angular:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-angular:$CI_COMMIT_REF_NAME
+    # Cyanweb Nginx Image:
+    - echo "FROM ghcr.io/USEPA/cyanweb-nginx:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-nginx:$CI_COMMIT_REF_NAME
+    # Cyanweb MySQL Image:
+    - echo "FROM ghcr.io/USEPA/cyanweb-db:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-db:$CI_COMMIT_REF_NAME
+  environment:
+    name: dev
+    url: http://qed.devsecops-dev.aws.epa.gov
+    kubernetes:
+      namespace: cyanweb-kube
+
+ApplyManifests:
+  stage: Deployment
+  tags:
+    - devsecops-instance
+  when: manual
+  image: dtzar/helm-kubectl
+  script:
+    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --server="$KUBE_URL"
+    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --certificate-authority=$KUBE_CA_PEM_FILE --embed-certs=true
+    - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
+    - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
+    - kubectl config use-context default
+    - kubectl apply -f k8s/
+  environment:
+    name: dev
+    url: http://qed.devsecops-dev.aws.epa.gov
+    kubernetes:
+      namespace: cyanweb-kube
+
+ScalePods:
+  stage: Restart Pods
+  tags:
+    - devsecops-instance
+  when: manual
+  image: dtzar/helm-kubectl
+  script:
+    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --server="$KUBE_URL"
+    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --certificate-authority=$KUBE_CA_PEM_FILE --embed-certs=true
+    - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
+    - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
+    - kubectl config use-context default
+    - kubectl scale deployment cyanweb-flask --replicas=0
+    - kubectl scale deployment cyanweb-flask --replicas=1
+    - kubectl scale deployment cyanweb-celery --replicas=0
+    - kubectl scale deployment cyanweb-celery --replicas=1
+    - kubectl scale deployment cyanweb-mysql --replicas=0
+    - kubectl scale deployment cyanweb-mysql --replicas=1
+    - kubectl scale deployment cyanweb-redis --replicas=0
+    - kubectl scale deployment cyanweb-redis --replicas=1
+    - kubectl scale deployment cyanweb-nginx --replicas=0
+    - kubectl scale deployment cyanweb-nginx --replicas=1
+  environment:
+    name: dev
+    url: http://qed.devsecops-dev.aws.epa.gov
+    kubernetes:
+      namespace: cyanweb-kube
+
+ApiImageScan:
+  stage: Image Scan
+  tags:
+    - twistcli
+  when: manual
+  allow_failure: false
+  variables:
+    cyanweb_api_image: "qed/cyanweb_kube/cyanweb-api:dev-gl"
+  script:
+    - /public/server/apps/twistcli images scan --details --address https://prismacloud.gitlab-prod.aws.epa.gov $cyanweb_api_image
+
+MysqlImageScan:
+  stage: Image Scan
+  tags:
+    - twistcli
+  when: manual
+  allow_failure: false
+  variables:
+    cyanweb_db_image: "qed/cyanweb_kube/cyanweb-db:dev-gl"
+  script:
+    - /public/server/apps/twistcli images scan --details --address https://prismacloud.gitlab-prod.aws.epa.gov $cyanweb_db_image
+
+AngularImageScan:
+  stage: Image Scan
+  tags:
+    - twistcli
+  when: manual
+  allow_failure: false
+  variables:
+    cyanweb_angular_image: "qed/cyanweb_kube/cyanweb-angular:dev-gl"
+  script:
+    - /public/server/apps/twistcli images scan --details --address https://prismacloud.gitlab-prod.aws.epa.gov $cyanweb_angular_image
+
+NginxImageScan:
+  stage: Image Scan
+  tags:
+    - twistcli
+  when: manual
+  allow_failure: false
+  variables:
+    cyanweb_nginx_image: "qed/cyanweb_kube/cyanweb-nginx:dev-gl"
+  script:
+    - /public/server/apps/twistcli images scan --details --address https://prismacloud.gitlab-prod.aws.epa.gov $cyanweb_nginx_image
