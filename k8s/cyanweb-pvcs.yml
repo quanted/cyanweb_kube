@@ -1,0 +1,41 @@
+# # Cyanweb Config PVC
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: cyanweb-config-pvolume-claim1
+#   namespace: cyanweb-kube
+#   labels:
+#     app: cyanweb-config-pvolume-claim1
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Gi
+#   selector:
+#     matchLabels:
+#       release: "stable"
+#       name: cyanweb-config-pv
+# ---
+
+# # Cyanweb MySQL PVC
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: cyanweb-mysql-pvolume-claim1
+#   namespace: cyanweb-kube
+#   labels:
+#     app: cyanweb-mysql-pvolume-claim1
+# spec:
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 1Gi
+#   selector:
+#     matchLabels:
+#       release: "stable"
+#       name: cyanweb-mysql-pv
+# ---

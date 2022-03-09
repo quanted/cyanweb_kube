@@ -1,0 +1,37 @@
+# # Cyanweb Config PV
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: cyanweb-config-pv
+#   labels:
+#     type: local
+#     app: cyanweb-config-pv
+# spec:
+#   storageClassName: cyanweb-config-pv
+#   accessModes:
+#     - ReadWriteMany
+#   capacity:
+#     storage: 1Gi
+#   hostPath:
+#     path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config
+# ---
+
+# # Cyanweb MySQL PV
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: cyanweb-mysql-pv
+#   labels:
+#     type: local
+#     app: cyanweb-mysql-pv
+# spec:
+#   storageClassName: cyanweb-mysql-pv
+#   accessModes:
+#     - ReadWriteMany
+#   capacity:
+#     storage: 5Gi
+#   hostPath:
+#     path: /run/desktop/mnt/host/c/Users/inick/mysql_data
+# ---

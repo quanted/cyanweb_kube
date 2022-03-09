@@ -70,7 +70,3 @@ spec:
       - name: cyanweb-config-volume
         persistentVolumeClaim:
           claimName: cyanweb-config-pvolume-claim1
-      # volumes:
-      #   - name: cyanweb-config-volume
-      #     hostPath:
-      #       path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config

@@ -40,7 +40,7 @@ spec:
           periodSeconds: 30
         volumeMounts:
           - mountPath: /var/lib/mysql
-            name: cyanweb-appdata
+            name: cyanweb-mysql-pvolume
         ports:
         - containerPort: 3306
           protocol: TCP
