@@ -20,6 +20,8 @@ spec:
       containers:
       - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-db:dev-gl
         imagePullPolicy: Always
+      # - image: cyanweb-db-testing
+      #   imagePullPolicy: Never
         name: cyanweb-mysql
         env:
           - name: MYSQL_RANDOM_ROOT_PASSWORD
@@ -48,6 +50,6 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       volumes:
-        - name: cyanweb-mysql-pvolume
+      - name: cyanweb-mysql-pvolume
         persistentVolumeClaim:
           claimName: cyanweb-mysql-pvolume-claim1

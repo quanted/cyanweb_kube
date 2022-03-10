@@ -8,15 +8,16 @@
 #   labels:
 #     app: cyanweb-config-pvolume-claim1
 # spec:
+#   storageClassName: cyanweb-config-pv
 #   accessModes:
 #     - ReadWriteMany
 #   resources:
 #     requests:
 #       storage: 1Gi
-#   selector:
-#     matchLabels:
-#       release: "stable"
-#       name: cyanweb-config-pv
+#   # selector:
+#   #   matchLabels:
+#   #     release: "stable"
+#   #     name: cyanweb-config-pv
 # ---
 
 # # Cyanweb MySQL PVC
@@ -29,13 +30,14 @@
 #   labels:
 #     app: cyanweb-mysql-pvolume-claim1
 # spec:
+#   storageClassName: cyanweb-mysql-pv
 #   accessModes:
 #     - ReadWriteMany
 #   resources:
 #     requests:
-#       storage: 1Gi
-#   selector:
-#     matchLabels:
-#       release: "stable"
-#       name: cyanweb-mysql-pv
+#       storage: 5Gi
+#   # selector:
+#   #   matchLabels:
+#   #     release: "stable"
+#   #     name: cyanweb-mysql-pv
 # ---

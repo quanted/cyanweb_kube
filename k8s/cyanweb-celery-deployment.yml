@@ -34,8 +34,8 @@ spec:
         - configMapRef:
             name: cyanweb-config
         image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
-        # image: cyanweb-api-testing
         imagePullPolicy: Always
+        # image: cyanweb-api-testing
         # imagePullPolicy: Never
         resources:
           requests:

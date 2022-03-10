@@ -4,9 +4,9 @@
 # kind: PersistentVolume
 # metadata:
 #   name: cyanweb-config-pv
+#   namespace: cyanweb-kube
 #   labels:
 #     type: local
-#     app: cyanweb-config-pv
 # spec:
 #   storageClassName: cyanweb-config-pv
 #   accessModes:
@@ -23,9 +23,9 @@
 # kind: PersistentVolume
 # metadata:
 #   name: cyanweb-mysql-pv
+#   namespace: cyanweb-kube
 #   labels:
 #     type: local
-#     app: cyanweb-mysql-pv
 # spec:
 #   storageClassName: cyanweb-mysql-pv
 #   accessModes:

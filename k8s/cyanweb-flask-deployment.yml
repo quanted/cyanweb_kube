@@ -24,6 +24,8 @@ spec:
       containers:
       - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
         imagePullPolicy: Always
+      # - image: cyanweb-api-testing
+      #   imagePullPolicy: Never
         envFrom:
           - configMapRef:
               name: cyanweb-config
@@ -35,14 +37,14 @@ spec:
             memory: "1Gi"
             cpu: "1000m"
         readinessProbe:
-          # tcpSocket:
-          #   port: 5001
+          tcpSocket:
+            port: 5001
           initialDelaySeconds: 5
           periodSeconds: 10
           timeoutSeconds: 10
         livenessProbe:
-          # tcpSocket:
-          #   port: 5001
+          tcpSocket:
+            port: 5001
           initialDelaySeconds: 15
           periodSeconds: 30
           timeoutSeconds: 10
