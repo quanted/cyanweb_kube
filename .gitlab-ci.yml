@@ -98,7 +98,7 @@ ApiImageScan:
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "qed/cyanweb_kube/cyanweb-api:dev-gl"
+    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl"
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
     - docker pull $prisma_cloud_scan_image
@@ -115,7 +115,7 @@ MysqlImageScan:
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "qed/cyanweb_kube/cyanweb-db:dev-gl"
+    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-db:dev-gl"
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
     - docker pull $prisma_cloud_scan_image
@@ -132,7 +132,7 @@ AngularImageScan:
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "qed/cyanweb_kube/cyanweb-angular:dev-gl"
+    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-angular:dev-gl"
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
     - docker pull $prisma_cloud_scan_image
@@ -149,7 +149,7 @@ NginxImageScan:
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "qed/cyanweb_kube/cyanweb-nginx:dev-gl"
+    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-nginx:dev-gl"
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
     - docker pull $prisma_cloud_scan_image
