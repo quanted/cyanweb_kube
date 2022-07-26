@@ -33,10 +33,10 @@ spec:
         envFrom:
         - configMapRef:
             name: cyanweb-config
-        image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
-        imagePullPolicy: Always
-        # image: cyanweb-api-testing
-        # imagePullPolicy: Never
+        # image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
+        # imagePullPolicy: Always
+        image: cyanweb-api-testing
+        imagePullPolicy: Never
         resources:
           requests:
             memory: "1Gi"

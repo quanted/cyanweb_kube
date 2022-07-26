@@ -22,10 +22,10 @@ spec:
         app: cyanweb-flask
     spec:
       containers:
-      - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
-        imagePullPolicy: Always
-      # - image: cyanweb-api-testing
-      #   imagePullPolicy: Never
+      # - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
+      #   imagePullPolicy: Always
+      - image: cyanweb-api-testing
+        imagePullPolicy: Never
         envFrom:
           - configMapRef:
               name: cyanweb-config
