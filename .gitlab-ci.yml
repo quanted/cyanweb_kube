@@ -35,7 +35,7 @@ CopyDevImages:
     - echo "FROM ghcr.io/usepa/cyanweb-db:dev-kube" > /workspace/Dockerfile
     - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-db:$CI_COMMIT_REF_NAME
   environment:
-    name: dev
+    name: stg
     url: http://qed.devsecops-dev.aws.epa.gov
     kubernetes:
       namespace: qed-45-stg
@@ -54,7 +54,7 @@ ApplyManifests:
     - kubectl config use-context default
     - kubectl apply -f k8s/
   environment:
-    name: dev
+    name: stg
     url: http://qed.devsecops-dev.aws.epa.gov
     kubernetes:
       namespace: qed-45-stg
@@ -82,7 +82,7 @@ ScalePods:
     - kubectl scale deployment cyanweb-nginx --replicas=0
     - kubectl scale deployment cyanweb-nginx --replicas=1
   environment:
-    name: dev
+    name: stg
     url: http://qed.devsecops-dev.aws.epa.gov
     kubernetes:
       namespace: qed-45-stg
