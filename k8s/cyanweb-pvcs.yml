@@ -7,7 +7,7 @@
 # # kind: PersistentVolumeClaim
 # # metadata:
 # #   name: cyanweb-config-pvolume-claim1
-# #   namespace: cyanweb-kube
+# #   namespace: qed-kube-dev
 # #   labels:
 # #     app: cyanweb-config-pvolume-claim1
 # # spec:
@@ -29,7 +29,7 @@
 # kind: PersistentVolumeClaim
 # metadata:
 #   name: cyanweb-mysql-pvolume-claim1
-#   namespace: cyanweb-kube
+#   namespace: qed-kube-dev
 #   labels:
 #     app: cyanweb-mysql-pvolume-claim1
 # spec:

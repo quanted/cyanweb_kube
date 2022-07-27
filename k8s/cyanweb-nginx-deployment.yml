@@ -4,7 +4,7 @@ metadata:
   labels:
     app: cyanweb-nginx
   name: cyanweb-nginx
-  namespace: cyanweb-kube
+  namespace: qed-kube-dev
   annotations:
     app.gitlab.com/app: ${CI_PROJECT_PATH_SLUG}
     app.gitlab.com/env: ${CI_ENVIRONMENT_SLUG}

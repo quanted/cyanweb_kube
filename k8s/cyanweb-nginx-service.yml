@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cyanweb-nginx
-  namespace: cyanweb-kube
+  namespace: qed-kube-dev
 spec:
   type: NodePort
   selector:
