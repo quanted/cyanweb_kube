@@ -38,7 +38,7 @@ CopyDevImages:
     name: dev
     url: http://qed.devsecops-dev.aws.epa.gov
     kubernetes:
-      namespace: cyanweb-kube
+      namespace: qed-45-stg
 
 ApplyManifests:
   stage: Deployment
@@ -57,7 +57,7 @@ ApplyManifests:
     name: dev
     url: http://qed.devsecops-dev.aws.epa.gov
     kubernetes:
-      namespace: cyanweb-kube
+      namespace: qed-45-stg
 
 ScalePods:
   stage: Restart Pods
@@ -85,7 +85,7 @@ ScalePods:
     name: dev
     url: http://qed.devsecops-dev.aws.epa.gov
     kubernetes:
-      namespace: cyanweb-kube
+      namespace: qed-45-stg
 
 ApiImageScan:
   stage: Image Scan

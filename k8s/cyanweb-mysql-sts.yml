@@ -4,7 +4,7 @@ metadata:
   labels:
     app: cyanweb-mysql
   name: cyanweb-mysql
-  namespace: cyanweb-kube
+  namespace: qed-45-stg
 spec:
   podManagementPolicy: OrderedReady
   replicas: 1
