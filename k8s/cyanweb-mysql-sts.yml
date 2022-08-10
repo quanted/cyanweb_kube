@@ -52,4 +52,4 @@ spec:
       volumes:
       - name: cyanweb-mysql-pvolume
         persistentVolumeClaim:
-          claimName: cyanweb-mysql-pvolume-claim1
+          claimName: cyanweb-mysql-pv
