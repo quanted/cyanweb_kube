@@ -13,7 +13,7 @@ include:
 CopyDevImages:
   stage: Image Build
   tags:
-    - devsecops-instance
+    - qed-stg-runner
   when: manual
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -43,7 +43,7 @@ CopyDevImages:
 ApplyManifests:
   stage: Deployment
   tags:
-    - devsecops-instance
+    - qed-stg-runner
   when: manual
   image: dtzar/helm-kubectl
   script:
@@ -62,7 +62,7 @@ ApplyManifests:
 ScalePods:
   stage: Restart Pods
   tags:
-    - devsecops-instance
+    - qed-stg-runner
   when: manual
   image: dtzar/helm-kubectl
   script:
