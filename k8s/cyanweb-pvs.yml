@@ -3,21 +3,21 @@
 # # NOTE: Will not need this PV, using "echo $VAL > /path/to/file.txt" method
 ##############################################################################
 # # ---
-# # apiVersion: v1
-# # kind: PersistentVolume
-# # metadata:
-# #   name: cyanweb-config-pv
-# #   namespace: qed-45-stg
-# #   labels:
-# #     type: local
-# # spec:
-# #   storageClassName: cyanweb-config-pv
-# #   accessModes:
-# #     - ReadWriteMany
-# #   capacity:
-# #     storage: 1Gi
-# #   hostPath:
-# #     path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: cyanweb-config-pv
+#   namespace: qed-45-stg
+#   labels:
+#     type: local
+# spec:
+#   storageClassName: manual
+#   accessModes:
+#     - ReadOnlyMany
+#   capacity:
+#     storage: 2Mi
+#   hostPath:
+#     path: /run/desktop/mnt/host/c/Users/inick/GitHub/cyanweb_kube/EPA-Cyano-Web/config
 # # ---
 ##############################################################################
 

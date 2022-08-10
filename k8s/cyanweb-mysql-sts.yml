@@ -20,7 +20,7 @@ spec:
       containers:
       - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-db:dev-gl
         imagePullPolicy: Always
-      # - image: cyanweb-db-testing
+      # - image: cyan-db
       #   imagePullPolicy: Never
         name: cyanweb-mysql
         env:

@@ -4,11 +4,13 @@ metadata:
   name: cyanweb-nginx
   namespace: qed-45-stg
 spec:
-  type: NodePort
+  # type: NodePort
+  type: ClusterIP
   selector:
     app: cyanweb-nginx
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8081
+      targetPort: 8081
       name: http
+      # nodePort: 30001

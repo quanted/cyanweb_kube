@@ -24,7 +24,7 @@ spec:
       containers:
       - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-nginx:dev-gl
         imagePullPolicy: Always
-      # - image: cyanweb-nginx-testing
+      # - image: cyan-webserver
       #   imagePullPolicy: Never
         name: nginx
         readinessProbe:

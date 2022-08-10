@@ -24,7 +24,7 @@ spec:
       containers:
       - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
         imagePullPolicy: Always
-      # - image: cyanweb-api-testing
+      # - image: cyan-api
       #   imagePullPolicy: Never
         envFrom:
           - configMapRef:
@@ -52,12 +52,12 @@ spec:
         ports:
         - containerPort: 5001
           protocol: TCP
-        volumeMounts:
-          - mountPath: /config
-            name: cyanweb-config-volume
+        # volumeMounts:
+        #   - mountPath: /config
+        #     name: cyanweb-config-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      volumes:
-      - name: cyanweb-config-volume
-        persistentVolumeClaim:
-          claimName: cyanweb-config-pvolume-claim1
+      # volumes:
+      # - name: cyanweb-config-volume
+      #   persistentVolumeClaim:
+      #     claimName: cyanweb-config-pvolume-claim1
