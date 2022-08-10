@@ -22,8 +22,10 @@ spec:
         app: cyanweb-redis
     spec:
       containers:
-      - image: redis:latest
+      - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-nginx:dev-gl
         imagePullPolicy: Always
+      # - image: cyan-redis
+      #   imagePullPolicy: Never
         name: cyanweb-redis
         livenessProbe:
           exec:

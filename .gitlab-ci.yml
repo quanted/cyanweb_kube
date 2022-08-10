@@ -34,6 +34,9 @@ CopyDevImages:
     # Cyanweb MySQL Image:
     - echo "FROM ghcr.io/usepa/cyanweb-db:dev-kube" > /workspace/Dockerfile
     - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-db:$CI_COMMIT_REF_NAME
+    # Cyanweb Redis Image:
+    - echo "FROM ghcr.io/usepa/cyanweb-redis:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-redis:$CI_COMMIT_REF_NAME
   environment:
     name: stg
     url: http://qed.qed-stage.aws.epa.gov

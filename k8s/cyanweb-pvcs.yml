@@ -32,7 +32,7 @@ metadata:
     app: cyanweb-mysql-pvolume-claim1
 spec:
   volumeName: cyanweb-mysql-pv
-  storageClassName: cyanweb-mysql-pv
+  storageClassName: efs-sc
   accessModes:
     - ReadWriteMany
   resources:
