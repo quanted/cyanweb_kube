@@ -48,3 +48,5 @@ spec:
         - containerPort: 80
         - containerPort: 443
       restartPolicy: Always
+      imagePullSecrets:
+        - name: glcr-auth

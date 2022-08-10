@@ -66,6 +66,8 @@ spec:
         #     name: cyanweb-config-mount
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+      imagePullSecrets:
+        - name: glcr-auth
       # volumes:
       # - name: cyanweb-config-mount
       #   persistentVolumeClaim:

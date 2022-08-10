@@ -57,6 +57,8 @@ spec:
         #     name: cyanweb-config-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+      imagePullSecrets:
+        - name: glcr-auth
       # volumes:
       # - name: cyanweb-config-volume
       #   persistentVolumeClaim:
