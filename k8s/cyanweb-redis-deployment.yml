@@ -48,3 +48,5 @@ spec:
             protocol: TCP
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+      imagePullSecrets:
+        - name: glcr-auth
