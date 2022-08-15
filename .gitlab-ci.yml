@@ -50,12 +50,14 @@ ApplyManifests:
   when: manual
   image: dtzar/helm-kubectl
   script:
+    - apk add gettext
     - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --server="$KUBE_URL"
     - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --certificate-authority=$KUBE_CA_PEM_FILE --embed-certs=true
     - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
     - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
     - kubectl config use-context default
     - kubectl apply -f k8s/
+    - envsubst < k8s/cyanweb-configmap.yml | kubectl apply -f -
   environment:
     name: stg
     url: http://qed.qed-stage.aws.epa.gov
