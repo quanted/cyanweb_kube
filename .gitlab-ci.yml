@@ -56,8 +56,18 @@ ApplyManifests:
     - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
     - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
     - kubectl config use-context default
-    - kubectl apply -f k8s/
+    # - kubectl apply -f k8s/
     - envsubst < k8s/cyanweb-configmap.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-celery-deployment.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-flask-deployment.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-flask-service.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-mysql-service.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-mysql-sts.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-nginx-deployment.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-nginx-service.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-pvcs.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-redis-deployment.yml | kubectl apply -f -
+    - envsubst < k8s/cyanweb-redis-service.yml | kubectl apply -f -
   environment:
     name: stg
     url: http://qed.qed-stage.aws.epa.gov
