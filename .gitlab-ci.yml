@@ -9,30 +9,6 @@ include:
     file: '.gitlab-ci.yml'
   - remote: 'https://gitlab.com/prismacloud-public/shift-left/extension/-/raw/master/.pcs.gitlab-ci.yml'
 
-# variables:
-#   APP_NAME: '$APP_NAME'
-#   CYANWEB_CRYPT_KEY: '$CYANWEB_CRYPT_KEY'
-#   DB_HOST: '$DB_HOST'
-#   DB_NAME: '$DB_NAME'
-#   DB_PASS: '$DB_PASS'
-#   DB_PORT: '$DB_PORT'
-#   DB_ROOT_PASS: '$DB_ROOT_PASS'
-#   DB_USER: '$DB_USER'
-#   EMAIL: '$EMAIL'
-#   EMAIL_FROM: '$EMAIL_FROM'
-#   EMAIL_PASS: '$EMAIL_PASS'
-#   EMAIL_PORT: '$EMAIL_PORT'
-#   EMAIL_SMTP: '$EMAIL_SMTP'
-#   FLASK_HOST: '$FLASK_HOST'
-#   FLASK_PORT: '$FLASK_PORT'
-#   HOST_DOMAIN: '$HOST_DOMAIN'
-#   REDIS_HOSTNAME: '$REDIS_HOSTNAME'
-#   REDIS_PORT: '$REDIS_PORT'
-#   SESSION_EXPIRE_SECONDS: '$SESSION_EXPIRE_SECONDS'
-#   SK: '$SK'
-#   TOMCAT_API: '$TOMCAT_API'
-#   WATERBODY_URL: '$WATERBODY_URL'
-
 CopyDevImages:
   stage: Image Build
   tags:
@@ -79,7 +55,6 @@ ApplyManifests:
     - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
     - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
     - kubectl config use-context default
-    # - kubectl apply -f k8s/
     - envsubst < k8s/cyanweb-configmap.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-celery-deployment.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-flask-deployment.yml | kubectl apply -f -
@@ -135,33 +110,33 @@ DeleteManifests:
 #     kubernetes:
 #       namespace: qed-45-stg
 
-ScalePods:
-  stage: Restart Pods
-  tags:
-    - qed-stg-runner
-  when: manual
-  image: dtzar/helm-kubectl
-  script:
-    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --server="$KUBE_URL"
-    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --certificate-authority=$KUBE_CA_PEM_FILE --embed-certs=true
-    - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
-    - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
-    - kubectl config use-context default
-    - kubectl scale deployment cyanweb-flask --replicas=0
-    - kubectl scale deployment cyanweb-flask --replicas=1
-    - kubectl scale deployment cyanweb-celery --replicas=0
-    - kubectl scale deployment cyanweb-celery --replicas=1
-    - kubectl scale deployment cyanweb-mysql --replicas=0
-    - kubectl scale deployment cyanweb-mysql --replicas=1
-    - kubectl scale deployment cyanweb-redis --replicas=0
-    - kubectl scale deployment cyanweb-redis --replicas=1
-    - kubectl scale deployment cyanweb-nginx --replicas=0
-    - kubectl scale deployment cyanweb-nginx --replicas=1
-  environment:
-    name: stg
-    url: http://qed.qed-stage.aws.epa.gov
-    kubernetes:
-      namespace: qed-45-stg
+# ScalePods:
+#   stage: Restart Pods
+#   tags:
+#     - qed-stg-runner
+#   when: manual
+#   image: dtzar/helm-kubectl
+#   script:
+#     - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --server="$KUBE_URL"
+#     - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --certificate-authority=$KUBE_CA_PEM_FILE --embed-certs=true
+#     - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
+#     - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
+#     - kubectl config use-context default
+#     - kubectl scale deployment cyanweb-flask --replicas=0
+#     - kubectl scale deployment cyanweb-flask --replicas=1
+#     - kubectl scale deployment cyanweb-celery --replicas=0
+#     - kubectl scale deployment cyanweb-celery --replicas=1
+#     - kubectl scale deployment cyanweb-mysql --replicas=0
+#     - kubectl scale deployment cyanweb-mysql --replicas=1
+#     - kubectl scale deployment cyanweb-redis --replicas=0
+#     - kubectl scale deployment cyanweb-redis --replicas=1
+#     - kubectl scale deployment cyanweb-nginx --replicas=0
+#     - kubectl scale deployment cyanweb-nginx --replicas=1
+#   environment:
+#     name: stg
+#     url: http://qed.qed-stage.aws.epa.gov
+#     kubernetes:
+#       namespace: qed-45-stg
 
 ApiImageScan:
   stage: Image Scan
