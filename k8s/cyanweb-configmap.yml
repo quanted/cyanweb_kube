@@ -11,7 +11,7 @@ data:
   DB_HOST: ${DB_HOST}
   DB_NAME: ${DB_NAME}
   DB_PASS: ${DB_PASS}
-  DB_PORT: ${DB_PORT}
+  DB_PORT: '${DB_PORT}'
   # DB_ROOT_PASS: ${DB_ROOT_PASS}
   # DB_USER: ${DB_USER}
   # EMAIL: ${EMAIL}
