@@ -46,7 +46,7 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
-        - containerPort: 443
+        # - containerPort: 443
       restartPolicy: Always
       imagePullSecrets:
         - name: glcr-auth
