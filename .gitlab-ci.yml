@@ -1,8 +1,9 @@
 stages:
   - Image Build
+  - Image Scan
   - Deployment
   - Restart Pods
-  - Image Scan
+  
 
 include:
   - project: 'DSO/DASTScanner'
@@ -138,70 +139,70 @@ DeleteManifests:
 #     kubernetes:
 #       namespace: qed-45-stg
 
-ApiImageScan:
-  stage: Image Scan
-  extends:
-    - .pcs_compute_scan
-  tags:
-    - twistcli
-  when: manual
-  allow_failure: false
-  variables:
-    prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
-    GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl"
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
-    - docker pull $prisma_cloud_scan_image
-    - ./image_scan.sh
+# ApiImageScan:
+#   stage: Image Scan
+#   extends:
+#     - .pcs_compute_scan
+#   tags:
+#     - twistcli
+#   when: manual
+#   allow_failure: false
+#   variables:
+#     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
+#     GIT_STRATEGY: clone
+#     prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl"
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
+#     - docker pull $prisma_cloud_scan_image
+#     - ./image_scan.sh
 
-MysqlImageScan:
-  stage: Image Scan
-  extends:
-    - .pcs_compute_scan
-  tags:
-    - twistcli
-  when: manual
-  allow_failure: false
-  variables:
-    prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
-    GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-db:dev-gl"
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
-    - docker pull $prisma_cloud_scan_image
-    - ./image_scan.sh
+# MysqlImageScan:
+#   stage: Image Scan
+#   extends:
+#     - .pcs_compute_scan
+#   tags:
+#     - twistcli
+#   when: manual
+#   allow_failure: false
+#   variables:
+#     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
+#     GIT_STRATEGY: clone
+#     prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-db:dev-gl"
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
+#     - docker pull $prisma_cloud_scan_image
+#     - ./image_scan.sh
 
-AngularImageScan:
-  stage: Image Scan
-  extends:
-    - .pcs_compute_scan
-  tags:
-    - twistcli
-  when: manual
-  allow_failure: false
-  variables:
-    prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
-    GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-angular:dev-gl"
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
-    - docker pull $prisma_cloud_scan_image
-    - ./image_scan.sh
+# AngularImageScan:
+#   stage: Image Scan
+#   extends:
+#     - .pcs_compute_scan
+#   tags:
+#     - twistcli
+#   when: manual
+#   allow_failure: false
+#   variables:
+#     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
+#     GIT_STRATEGY: clone
+#     prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-angular:dev-gl"
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
+#     - docker pull $prisma_cloud_scan_image
+#     - ./image_scan.sh
 
-NginxImageScan:
-  stage: Image Scan
-  extends:
-    - .pcs_compute_scan
-  tags:
-    - twistcli
-  when: manual
-  allow_failure: false
-  variables:
-    prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
-    GIT_STRATEGY: clone
-    prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-nginx:dev-gl"
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
-    - docker pull $prisma_cloud_scan_image
-    - ./image_scan.sh
+# NginxImageScan:
+#   stage: Image Scan
+#   extends:
+#     - .pcs_compute_scan
+#   tags:
+#     - twistcli
+#   when: manual
+#   allow_failure: false
+#   variables:
+#     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
+#     GIT_STRATEGY: clone
+#     prisma_cloud_scan_image: "registry.epa.gov/qed/cyanweb_kube/cyanweb-nginx:dev-gl"
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.epa.gov
+#     - docker pull $prisma_cloud_scan_image
+#     - ./image_scan.sh
