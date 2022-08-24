@@ -28,8 +28,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: cyanweb-mysql-pvolume-claim1
   namespace: qed-45-stg
-  labels:
-    app: cyanweb-mysql-pvolume-claim1
+  # labels:
+  #   app: cyanweb-mysql-pvolume-claim1
 spec:
   volumeName: cyanweb-mysql-pv
   storageClassName: efs-sc
