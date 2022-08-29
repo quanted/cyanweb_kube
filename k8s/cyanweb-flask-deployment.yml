@@ -36,18 +36,18 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "1000m"
-        readinessProbe:
-          tcpSocket:
-            port: 5001
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          timeoutSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: 5001
-          initialDelaySeconds: 15
-          periodSeconds: 30
-          timeoutSeconds: 10
+        # readinessProbe:
+        #   tcpSocket:
+        #     port: 5001
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 10
+        #   timeoutSeconds: 10
+        # livenessProbe:
+        #   tcpSocket:
+        #     port: 5001
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 30
+        #   timeoutSeconds: 10
         name: cyanweb-flask
         ports:
         - containerPort: 5001
