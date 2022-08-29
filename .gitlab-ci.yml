@@ -56,7 +56,7 @@ ApplyManifests:
     - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
     - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
     - kubectl config use-context default
-    - envsubst < k8s/cyanweb-pvcs.yml | kubectl apply -f -
+    # - envsubst < k8s/cyanweb-pvcs.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-configmap.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-celery-deployment.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-flask-deployment.yml | kubectl apply -f -
