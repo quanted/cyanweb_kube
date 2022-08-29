@@ -21,21 +21,21 @@
   #     name: cyanweb-config-pv
 # ---
 
-# # Cyanweb MySQL PVC
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: cyanweb-mysql-pvolume-claim1
-#   namespace: qed-45-stg
-#   # labels:
-#   #   app: cyanweb-mysql-pvolume-claim1
-# spec:
-#   volumeName: cyanweb-mysql-pv
-#   storageClassName: efs-sc
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: 5Gi
-# ---
+# Cyanweb MySQL PVC
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cyanweb-mysql-pvolume-claim1
+  namespace: qed-45-stg
+  # labels:
+  #   app: cyanweb-mysql-pvolume-claim1
+spec:
+  volumeName: cyanweb-mysql-pv
+  storageClassName: efs-sc
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---

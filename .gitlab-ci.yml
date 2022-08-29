@@ -56,6 +56,7 @@ ApplyManifests:
     - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
     - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
     - kubectl config use-context default
+    - envsubst < k8s/cyanweb-pvcs.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-configmap.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-celery-deployment.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-flask-deployment.yml | kubectl apply -f -
@@ -64,7 +65,6 @@ ApplyManifests:
     - envsubst < k8s/cyanweb-mysql-sts.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-nginx-deployment.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-nginx-service.yml | kubectl apply -f -
-    # - envsubst < k8s/cyanweb-pvcs.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-redis-deployment.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-redis-service.yml | kubectl apply -f -
   environment:
@@ -92,24 +92,24 @@ DeleteManifests:
     kubernetes:
       namespace: qed-45-stg
 
-# ApplyPVC:
-#   stage: Deployment
-#   tags:
-#     - qed-stg-runner
-#   when: manual
-#   image: dtzar/helm-kubectl
-#   script:
-#     - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --server="$KUBE_URL"
-#     - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --certificate-authority=$KUBE_CA_PEM_FILE --embed-certs=true
-#     - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
-#     - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
-#     - kubectl config use-context default
-#     - kubectl apply -f k8s/cyanweb-pvcs.yml
-#   environment:
-#     name: stg
-#     url: http://qed.qed-stage.aws.epa.gov
-#     kubernetes:
-#       namespace: qed-45-stg
+ApplyPVC:
+  stage: Deployment
+  tags:
+    - qed-stg-runner
+  when: manual
+  image: dtzar/helm-kubectl
+  script:
+    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --server="$KUBE_URL"
+    - kubectl config set-cluster "$KUBECTL_DEV_CLUSTER" --certificate-authority=$KUBE_CA_PEM_FILE --embed-certs=true
+    - kubectl config set-credentials gitlab --token="$KUBE_TOKEN"
+    - kubectl config set-context default --cluster="$KUBECTL_DEV_CLUSTER" --user=gitlab --namespace="$KUBE_NAMESPACE"
+    - kubectl config use-context default
+    - kubectl apply -f k8s/cyanweb-pvcs.yml
+  environment:
+    name: stg
+    url: http://qed.qed-stage.aws.epa.gov
+    kubernetes:
+      namespace: qed-45-stg
 
 # ScalePods:
 #   stage: Restart Pods
