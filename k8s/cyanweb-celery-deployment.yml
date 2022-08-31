@@ -33,10 +33,10 @@ spec:
         envFrom:
         - configMapRef:
             name: cyanweb-config
-        # image: registry.epa.gov/qed/cyanweb_kube/cyanweb-api:dev-gl
-        # imagePullPolicy: Always
-        image: cyanweb-api-testing
-        imagePullPolicy: Never
+        image: ghcr.io/usepa/cyanweb-api:dev-kube
+        imagePullPolicy: Always
+        # image: cyanweb-api-testing
+        # imagePullPolicy: Never
         resources:
           requests:
             memory: "1Gi"
@@ -61,12 +61,12 @@ spec:
           periodSeconds: 30
           timeoutSeconds: 10
         name: cyanweb-flask
-        volumeMounts:
-          - mountPath: /config
-            name: cyanweb-config-volume
+        # volumeMounts:
+        #   - mountPath: /config
+        #     name: cyanweb-config-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      volumes:
-      - name: cyanweb-config-volume
-        persistentVolumeClaim:
-          claimName: cyanweb-config-pvolume-claim1
+      # volumes:
+      # - name: cyanweb-config-volume
+      #   persistentVolumeClaim:
+      #     claimName: cyanweb-config-pvolume-claim1

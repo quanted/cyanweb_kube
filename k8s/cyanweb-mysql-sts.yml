@@ -18,10 +18,10 @@ spec:
         app: cyanweb-mysql
     spec:
       containers:
-      # - image: registry.epa.gov/qed/cyanweb_kube/cyanweb-db:dev-gl
-      #   imagePullPolicy: Always
-      - image: cyanweb-db-testing
-        imagePullPolicy: Never
+      - image: ghcr.io/usepa/cyanweb-db:dev-kube
+        imagePullPolicy: Always
+      # - image: cyanweb-db-testing
+      #   imagePullPolicy: Never
         name: cyanweb-mysql
         env:
           - name: MYSQL_RANDOM_ROOT_PASSWORD

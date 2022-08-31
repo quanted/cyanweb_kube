@@ -22,8 +22,9 @@ spec:
         app: cyanweb-redis
     spec:
       containers:
-      - image: redis:latest
-        imagePullPolicy: Always
+      - image: ghcr.io/usepa/cyanweb-redis:dev-kube
+      # - image: redis:latest
+      #   imagePullPolicy: Always
         name: cyanweb-redis
         livenessProbe:
           exec:
