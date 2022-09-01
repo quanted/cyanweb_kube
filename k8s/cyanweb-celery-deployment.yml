@@ -32,7 +32,7 @@ spec:
           - '1'
         envFrom:
         - configMapRef:
-            name: cyanweb-config
+            name: cyanweb-configmap
         image: ghcr.io/usepa/cyanweb-api:dev-kube
         imagePullPolicy: Always
         # image: cyanweb-api-testing

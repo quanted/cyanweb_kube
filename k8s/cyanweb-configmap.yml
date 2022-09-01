@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cyanweb-configmap
+  namespace: qed-kube-dev
+  labels:
+    app: cyanweb-configmap
+data:
+  APP_NAME: Cyanweb
+  CYANWEB_CRYPT_KEY: ${CYANWEB_CRYPT_KEY}
+  DB_HOST: cyanweb-mysql
+  DB_NAME: cyan_web_app_db
+  DB_PASS: ${DB_PASS}
+  DB_PORT: 3306
+  DB_ROOT_PASS: ${DB_ROOT_PASS}
+  DB_USER: cyano
+  EMAIL: cyanomailserver@gmail.com
+  EMAIL_FROM: cyan-noreply@gmail.com
+  EMAIL_PASS: ${EMAIL_PASS}
+  EMAIL_PORT: 465
+  EMAIL_SMTP: smtp.gmail.com
+  FLASK_HOST: cyanweb-api
+  FLASK_PORT: 5001
+  HOST_DOMAIN: https://qedcloud.net
+  REDIS_HOSTNAME: cyanweb-redis
+  REDIS_PORT: 6379
+  SESSION_EXPIRE_SECONDS: 3600
+  SK: ${SK}
+  TOMCAT_API: https://cyan.epa.gov
+  WATERBODY_URL: https://cyan.epa.gov

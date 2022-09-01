@@ -28,7 +28,7 @@ spec:
       #   imagePullPolicy: Never
         envFrom:
           - configMapRef:
-              name: cyanweb-config
+              name: cyanweb-configmap
         resources:
           requests:
             memory: "512Mi"
