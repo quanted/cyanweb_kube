@@ -18,7 +18,7 @@ spec:
         app: cyanweb-flask
     spec:
       containers:
-      - image: ghcr.io/usepa//cyanweb-api:dev-kube
+      - image: ghcr.io/usepa/cyanweb-api:dev-kube
         imagePullPolicy: Always
       # - image: cyanweb-api-testing
       #   imagePullPolicy: Never
