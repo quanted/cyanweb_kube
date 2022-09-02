@@ -1,5 +1,8 @@
 #!/bin/sh
 
+export $(grep -v '^#' .env | xargs)  # sets env vars with .env
+
+# Applys manifests with env vars:
 envsubst < k8s/cyanweb-configmap.yml | kubectl apply -f -
 envsubst < k8s/cyanweb-celery-deployment.yml | kubectl apply -f -
 envsubst < k8s/cyanweb-flask-deployment.yml | kubectl apply -f -
