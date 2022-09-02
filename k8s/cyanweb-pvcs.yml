@@ -33,7 +33,7 @@
 #   labels:
 #     app: cyanweb-mysql-pvolume-claim1
 # spec:
-#   storageClassName: cyanweb-mysql-pv
+#   storageClassName: efs-sc
 #   accessModes:
 #     - ReadWriteMany
 #   resources:
