@@ -2,3 +2,5 @@
 .DS_Store
 
 cyanweb-env.y*ml
+
+.env
