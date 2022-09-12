@@ -19,6 +19,7 @@ spec:
     spec:
       containers:
       - image: ghcr.io/usepa/cyanweb-redis:dev-kube
+        imagePullPolicy: Always
       # - image: redis:latest
       #   imagePullPolicy: Always
         name: cyanweb-redis
