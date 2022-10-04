@@ -24,7 +24,7 @@ data:
   HOST_DOMAIN: https://qedcloud.net/cyanweb
   REDIS_HOSTNAME: cyanweb-redis
   REDIS_PORT: "6379"
-  SESSION_EXPIRE_SECONDS: "3600"
+  SESSION_EXPIRE_SECONDS: "600"
   SK: '${SK}'
   TOMCAT_API: https://cyan.epa.gov
   WATERBODY_URL: https://cyan.epa.gov
