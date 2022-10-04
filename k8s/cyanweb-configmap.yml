@@ -21,7 +21,7 @@ data:
   EMAIL_SMTP: smtp.gmail.com
   FLASK_HOST: cyanweb-api
   FLASK_PORT: "5001"
-  HOST_DOMAIN: https://qedcloud.net
+  HOST_DOMAIN: https://qedcloud.net/cyanweb
   REDIS_HOSTNAME: cyanweb-redis
   REDIS_PORT: "6379"
   SESSION_EXPIRE_SECONDS: "3600"
