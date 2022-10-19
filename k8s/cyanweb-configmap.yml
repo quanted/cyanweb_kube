@@ -26,5 +26,5 @@ data:
   REDIS_PORT: "6379"
   SESSION_EXPIRE_SECONDS: "600"
   SK: '${SK}'
-  TOMCAT_API: https://cyan.epa.gov
-  WATERBODY_URL: https://cyan.epa.gov
+  TOMCAT_API: https://qedlinuxapi.epa.gov
+  WATERBODY_URL: https://qedlinuxapi.epa.gov
