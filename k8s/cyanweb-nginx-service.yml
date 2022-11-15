@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cyanweb-nginx
-  namespace: qed-45-stg
+  namespace: ${KUBECTL_NAMESPACE}
 spec:
   # type: NodePort
   type: ClusterIP

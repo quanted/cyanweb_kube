@@ -4,7 +4,7 @@ metadata:
   labels:
     app: cyanweb-flask
   name: cyanweb-flask
-  namespace: qed-45-stg
+  namespace: ${KUBECTL_NAMESPACE}
   annotations:
     app.gitlab.com/app: ${CI_PROJECT_PATH_SLUG}
     app.gitlab.com/env: ${CI_ENVIRONMENT_SLUG}

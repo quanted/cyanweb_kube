@@ -7,7 +7,7 @@
 # kind: PersistentVolume
 # metadata:
 #   name: cyanweb-config-pv
-#   namespace: qed-45-stg
+#   namespace: ${KUBECTL_NAMESPACE}
 #   labels:
 #     type: local
 # spec:
@@ -27,7 +27,7 @@
 # kind: PersistentVolume
 # metadata:
 #   name: cyanweb-mysql-pv
-#   namespace: qed-45-stg
+#   namespace: ${KUBECTL_NAMESPACE}
 #   labels:
 #     type: local
 # spec:
