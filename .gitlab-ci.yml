@@ -13,7 +13,7 @@ include:
 CopyDevImages:
   stage: Image Build
   tags:
-    - ${KUBECTL_RUNNER}
+    - $KUBECTL_RUNNER
   when: manual
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -38,15 +38,15 @@ CopyDevImages:
     - echo "FROM ghcr.io/usepa/cyanweb-redis:dev-kube" > /workspace/Dockerfile
     - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-redis:$CI_COMMIT_REF_NAME
   environment:
-    name: ${KUBECTL_ENV}
-    url: ${KUBECTL_URL}
+    name: $KUBECTL_ENV
+    url: $KUBECTL_URL
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: $KUBECTL_NAMESPACE
 
 ApplyManifests:
   stage: Deployment
   tags:
-    - ${KUBECTL_RUNNER}
+    - $KUBECTL_RUNNER
   when: manual
   image: dtzar/helm-kubectl
   script:
@@ -67,15 +67,15 @@ ApplyManifests:
     - envsubst < k8s/cyanweb-redis-deployment.yml | kubectl apply -f -
     - envsubst < k8s/cyanweb-redis-service.yml | kubectl apply -f -
   environment:
-    name: ${KUBECTL_ENV}
-    url: ${KUBECTL_URL}
+    name: $KUBECTL_ENV
+    url: $KUBECTL_URL
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: $KUBECTL_NAMESPACE
 
 DeleteManifests:
   stage: Deployment
   tags:
-    - ${KUBECTL_RUNNER}
+    - $KUBECTL_RUNNER
   when: manual
   image: dtzar/helm-kubectl
   script:
@@ -95,15 +95,15 @@ DeleteManifests:
     - kubectl delete -f k8s/cyanweb-redis-deployment.yml
     - kubectl delete -f k8s/cyanweb-redis-service.yml
   environment:
-    name: ${KUBECTL_ENV}
-    url: ${KUBECTL_URL}
+    name: $KUBECTL_ENV
+    url: $KUBECTL_URL
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: $KUBECTL_NAMESPACE
 
 ApplyPVC:
   stage: Deployment
   tags:
-    - ${KUBECTL_RUNNER}
+    - $KUBECTL_RUNNER
   when: manual
   image: dtzar/helm-kubectl
   script:
@@ -114,15 +114,15 @@ ApplyPVC:
     - kubectl config use-context default
     - kubectl apply -f k8s/cyanweb-pvcs.yml
   environment:
-    name: ${KUBECTL_ENV}
-    url: ${KUBECTL_URL}
+    name: $KUBECTL_ENV
+    url: $KUBECTL_URL
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: $KUBECTL_NAMESPACE
 
 # ScalePods:
 #   stage: Restart Pods
 #   tags:
-#     - ${KUBECTL_RUNNER}
+#     - $KUBECTL_RUNNER
 #   when: manual
 #   image: dtzar/helm-kubectl
 #   script:
@@ -142,10 +142,10 @@ ApplyPVC:
 #     - kubectl scale deployment cyanweb-nginx --replicas=0
 #     - kubectl scale deployment cyanweb-nginx --replicas=1
 #   environment:
-#     name: ${KUBECTL_ENV}
-#     url: ${KUBECTL_URL}
+#     name: $KUBECTL_ENV
+#     url: $KUBECTL_URL
 #     kubernetes:
-#       namespace: ${KUBECTL_NAMESPACE}
+#       namespace: $KUBECTL_NAMESPACE
 
 # ApiImageScan:
 #   stage: Image Scan
