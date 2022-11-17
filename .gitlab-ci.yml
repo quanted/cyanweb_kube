@@ -41,7 +41,7 @@ CopyDevImages:
     name: stg
     url: http://qed.qed-stage.aws.epa.gov
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: qed-45-stg
 
 ApplyManifests:
   stage: Deployment
@@ -70,7 +70,7 @@ ApplyManifests:
     name: stg
     url: http://qed.qed-stage.aws.epa.gov
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: qed-45-stg
 
 DeleteManifests:
   stage: Deployment
@@ -98,7 +98,7 @@ DeleteManifests:
     name: stg
     url: http://qed.qed-stage.aws.epa.gov
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: qed-45-stg
 
 ApplyPVC:
   stage: Deployment
@@ -117,7 +117,7 @@ ApplyPVC:
     name: stg
     url: http://qed.qed-stage.aws.epa.gov
     kubernetes:
-      namespace: ${KUBECTL_NAMESPACE}
+      namespace: qed-45-stg
 
 # ScalePods:
 #   stage: Restart Pods
@@ -145,7 +145,7 @@ ApplyPVC:
 #     name: stg
 #     url: http://qed.qed-stage.aws.epa.gov
 #     kubernetes:
-#       namespace: ${KUBECTL_NAMESPACE}
+#       namespace: qed-45-stg
 
 # ApiImageScan:
 #   stage: Image Scan

@@ -4,7 +4,7 @@
 # kind: PersistentVolumeClaim
 # metadata:
 #   name: cyanweb-config-pvc
-#   namespace: ${KUBECTL_NAMESPACE}
+#   namespace: qed-45-stg
 #   labels:
 #     app: cyanweb-config-pvc
 # spec:
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cyanweb-mysql-pvolume-claim1
-  namespace: ${KUBECTL_NAMESPACE}
+  namespace: qed-45-stg
 spec:
   volumeName: cyanweb-mysql-pv
   storageClassName: efs-sc

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cyanweb-config
-  namespace: ${KUBECTL_NAMESPACE}
+  namespace: qed-45-stg
   labels:
     app: cyanweb-config
 data:
