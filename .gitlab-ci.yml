@@ -43,6 +43,39 @@ CopyDevImages:
     kubernetes:
       namespace: qed-45-stg
 
+SetProdImages:
+  stage: Image Build
+  tags:
+    - qed-stg-runner
+  when: manual
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - mkdir -p /workspace
+    # Cyanweb Flask Image:
+    - echo "FROM ghcr.io/usepa/cyanweb-api:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-api:main-$CYANWEB_PROD_VERSION
+    # Cyanweb Angular Image:
+    - echo "FROM ghcr.io/usepa/cyanweb-angular:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-angular:main-$CYANWEB_PROD_VERSION
+    # Cyanweb Nginx Image:
+    - echo "FROM ghcr.io/usepa/cyanweb-nginx:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-nginx:main-$CYANWEB_PROD_VERSION
+    # Cyanweb MySQL Image:
+    - echo "FROM ghcr.io/usepa/cyanweb-db:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-db:main-$CYANWEB_PROD_VERSION
+    # Cyanweb Redis Image:
+    - echo "FROM ghcr.io/usepa/cyanweb-redis:dev-kube" > /workspace/Dockerfile
+    - /kaniko/executor --context=/workspace --destination=$CI_REGISTRY_IMAGE/cyanweb-redis:main-$CYANWEB_PROD_VERSION
+  environment:
+    name: stg
+    url: http://qed.qed-stage.aws.epa.gov
+    kubernetes:
+      namespace: qed-45-stg
+
 ApplyManifests:
   stage: Deployment
   tags:
