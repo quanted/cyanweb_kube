@@ -188,7 +188,7 @@ ApiImageScan:
   tags:
     - twistcli
   when: manual
-  allow_failure: false
+  allow_failure: true
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
@@ -205,7 +205,7 @@ MysqlImageScan:
   tags:
     - twistcli
   when: manual
-  allow_failure: false
+  allow_failure: true
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
@@ -222,7 +222,7 @@ AngularImageScan:
   tags:
     - twistcli
   when: manual
-  allow_failure: false
+  allow_failure: true
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
@@ -239,7 +239,7 @@ NginxImageScan:
   tags:
     - twistcli
   when: manual
-  allow_failure: false
+  allow_failure: true
   variables:
     prisma_cloud_compute_url: "https://prismacloud.gitlab-prod.aws.epa.gov"
     GIT_STRATEGY: clone
