@@ -185,6 +185,7 @@ Api Prisma Scan:
   stage: Image Scan
   tags:
     - twistcli
+  when: manual
   variables:
     GIT_STRATEGY: clone
   script:
@@ -198,6 +199,7 @@ Mysql Prisma Scan:
   stage: Image Scan
   tags:
     - twistcli
+  when: manual
   variables:
     GIT_STRATEGY: clone
   script:
@@ -211,6 +213,7 @@ Angular Prisma Scan:
   stage: Image Scan
   tags:
     - twistcli
+  when: manual
   variables:
     GIT_STRATEGY: clone
   script:
@@ -224,6 +227,7 @@ Nginx Prisma Scan:
   stage: Image Scan
   tags:
     - twistcli
+  when: manual
   variables:
     GIT_STRATEGY: clone
   script:
