@@ -187,13 +187,15 @@ Api Prisma Scan:
     - twistcli
   when: manual
   variables:
-    GIT_STRATEGY: clone
+    GIT_STRATEGY: none
   script:
     - 'export PRISMA_CI_TOKEN=$(curl -kH "Content-Type: application/json" -d "{\"username\":\"$prisma_cloud_compute_username\", \"password\":\"$prisma_cloud_compute_password\"}" https://prismacloud.epa.gov/api/v22.12/authenticate | jq -r .token)'
     - 'curl --progress-bar -L -k --header "Authorization: Bearer $PRISMA_CI_TOKEN" https://prismacloud.epa.gov/api/v1/util/twistcli > twistcli; chmod a+x twistcli;'
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE/cyanweb-api:$CI_COMMIT_REF_NAME
     - ./twistcli images scan $CI_REGISTRY_IMAGE/cyanweb-api:$CI_COMMIT_REF_NAME --address=https://prismacloud.epa.gov --details --token=$PRISMA_CI_TOKEN
+  after_script:
+    - rm -rf $CI_PROJECT_DIR
 
 Mysql Prisma Scan:
   stage: Image Scan
@@ -201,13 +203,15 @@ Mysql Prisma Scan:
     - twistcli
   when: manual
   variables:
-    GIT_STRATEGY: clone
+    GIT_STRATEGY: none
   script:
     - 'export PRISMA_CI_TOKEN=$(curl -kH "Content-Type: application/json" -d "{\"username\":\"$prisma_cloud_compute_username\", \"password\":\"$prisma_cloud_compute_password\"}" https://prismacloud.epa.gov/api/v22.12/authenticate | jq -r .token)'
     - 'curl --progress-bar -L -k --header "Authorization: Bearer $PRISMA_CI_TOKEN" https://prismacloud.epa.gov/api/v1/util/twistcli > twistcli; chmod a+x twistcli;'
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE/cyanweb-db:$CI_COMMIT_REF_NAME
     - ./twistcli images scan $CI_REGISTRY_IMAGE/cyanweb-db:$CI_COMMIT_REF_NAME --address=https://prismacloud.epa.gov --details --token=$PRISMA_CI_TOKEN
+  after_script:
+    - rm -rf $CI_PROJECT_DIR
 
 Angular Prisma Scan:
   stage: Image Scan
@@ -215,13 +219,15 @@ Angular Prisma Scan:
     - twistcli
   when: manual
   variables:
-    GIT_STRATEGY: clone
+    GIT_STRATEGY: none
   script:
     - 'export PRISMA_CI_TOKEN=$(curl -kH "Content-Type: application/json" -d "{\"username\":\"$prisma_cloud_compute_username\", \"password\":\"$prisma_cloud_compute_password\"}" https://prismacloud.epa.gov/api/v22.12/authenticate | jq -r .token)'
     - 'curl --progress-bar -L -k --header "Authorization: Bearer $PRISMA_CI_TOKEN" https://prismacloud.epa.gov/api/v1/util/twistcli > twistcli; chmod a+x twistcli;'
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE/cyanweb-angular:$CI_COMMIT_REF_NAME
     - ./twistcli images scan $CI_REGISTRY_IMAGE/cyanweb-angular:$CI_COMMIT_REF_NAME --address=https://prismacloud.epa.gov --details --token=$PRISMA_CI_TOKEN
+  after_script:
+    - rm -rf $CI_PROJECT_DIR
 
 Nginx Prisma Scan:
   stage: Image Scan
@@ -229,10 +235,12 @@ Nginx Prisma Scan:
     - twistcli
   when: manual
   variables:
-    GIT_STRATEGY: clone
+    GIT_STRATEGY: none
   script:
     - 'export PRISMA_CI_TOKEN=$(curl -kH "Content-Type: application/json" -d "{\"username\":\"$prisma_cloud_compute_username\", \"password\":\"$prisma_cloud_compute_password\"}" https://prismacloud.epa.gov/api/v22.12/authenticate | jq -r .token)'
     - 'curl --progress-bar -L -k --header "Authorization: Bearer $PRISMA_CI_TOKEN" https://prismacloud.epa.gov/api/v1/util/twistcli > twistcli; chmod a+x twistcli;'
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE/cyanweb-nginx:$CI_COMMIT_REF_NAME
     - ./twistcli images scan $CI_REGISTRY_IMAGE/cyanweb-nginx:$CI_COMMIT_REF_NAME --address=https://prismacloud.epa.gov --details --token=$PRISMA_CI_TOKEN
+  after_script:
+    - rm -rf $CI_PROJECT_DIR
