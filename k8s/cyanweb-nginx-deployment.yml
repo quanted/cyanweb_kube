@@ -18,7 +18,7 @@ spec:
         app: cyanweb-nginx
     spec:
       containers:
-      - image: ghcr.io/usepa/cyanweb-nginx:dev-kube
+      - image: ghcr.io/usepa/cyanweb-nginx:ceam
         imagePullPolicy: Always
       # - image: cyanweb-nginx-testing
       #   imagePullPolicy: Never
